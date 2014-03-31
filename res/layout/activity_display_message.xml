@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gridLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:alignmentMode="alignMargins"
+    android:columnCount="1"
+    android:columnOrderPreserved="true"
+    android:orientation="vertical"
+    android:rowCount="10"
+    android:rowOrderPreserved="true" >
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="241dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:onClick="killActivity"
+        android:text="@string/back" />
+
+    <TextView
+        android:id="@+id/promilleText"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="84dp"
+        android:textIsSelectable="true"
+        android:textStyle="bold" 
+        android:gravity="center" />
+
+</RelativeLayout>
