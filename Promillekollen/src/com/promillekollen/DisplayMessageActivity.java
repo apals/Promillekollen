@@ -1,5 +1,5 @@
 /**
- * @author Andreas Pålsson
+ * @author Andreas PÃ¥lsson
  * This activity is only used for displaying the user's blood alcohol content. It retrieves the user's entered
  * information from MainActivity and calculates the user's blood alcohol content.
  */
@@ -19,6 +19,8 @@ import android.support.v4.app.NavUtils;
 
 public class DisplayMessageActivity extends Activity {
 	
+	/* A gender constant. The mean value of the two are used in this program. */
+	private static final double genderConstant = (0.55+0.68)/2;
 	private int numberOfBeers = 0;
 	private int numberOfShots = 0;
 	private int numberOfDrinks = 0;
@@ -46,17 +48,15 @@ public class DisplayMessageActivity extends Activity {
 				
 		retrieveUserInput();
 	
-		/* Calculate a constant used in the formula for blood alcohol content */
-		double genderConstant = (0.55+0.68)/2;
 				
 		/* Calculate the total amount of alcohol in liquid ounces */
-		double alcoholAmount = calculateAlcoholAmount();		
+		double alcoholAmount = calculateAlcoholAmount(numberOfBeers, numberOfShots, numberOfDrinks, numberOfWineGlasses);		
 		
 		/* Calculate the weight in pounds instead of kilograms */
 		double W = weight/0.45359237;
 		
 		/* Calculate the blood alcohol content */
-		double BAC = calculateBAC(alcoholAmount, W, genderConstant, numberOfHours); 
+		double BAC = calculateBAC(alcoholAmount, W, numberOfHours); 
 				
 		/* If nothing or unexpected user input */
 		if(alcoholAmount <= 0)
@@ -71,7 +71,7 @@ public class DisplayMessageActivity extends Activity {
 		/* Display the result */
 		TextView textView = (TextView) findViewById(R.id.promilleText);
 		textView.setTextSize(12);
-		textView.setText("Din promillehalt är " + BAC);
+		textView.setText("Din promillehalt Ã¤r " + BAC);
 		
 	}
 	
@@ -83,14 +83,14 @@ public class DisplayMessageActivity extends Activity {
 	 * @param numberOfHours The amount of hours the user has been drinking for
 	 * @return The user's blood alcohol content
 	 */
-	public double calculateBAC(double alcoholAmount, double weight, double genderConstant, int numberOfHours) {
+	public double calculateBAC(double alcoholAmount, double weight, int numberOfHours) {
 		return (alcoholAmount * 5.14/(weight * genderConstant)) - 0.015*numberOfHours;
 	}
 	
 	/**
 	 * @return The amount of alcohol the user has drunk in liquid ounces
 	 */
-	public double calculateAlcoholAmount() {
+	public double calculateAlcoholAmount(int numberOfBeers, int numberOfShots, int numberOfDrinks, int numberOfWineGlasses) {
 		double a = numberOfBeers*11.1586275*0.052;
 		double b = numberOfShots*1.35256091*0.4;
 		double c = numberOfDrinks*1.35256091*0.4;
