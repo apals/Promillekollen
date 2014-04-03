@@ -26,5 +26,11 @@ public class DisplayMessageActivityTest extends TestCase {
 	public void testCalculateAlcoholAmount() {
 		assertEquals(0.0, activity.calculateAlcoholAmount(0, 0, 0, 0));
 	}
+	
+	public void testIsInteger() {
+		assertFalse(activity.isInteger("01"));
+		assertTrue(activity.isInteger("1"));
+		assertFalse(activity.isInteger("123a$"));
+	}
 
 }
